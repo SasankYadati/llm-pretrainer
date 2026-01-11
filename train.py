@@ -1,5 +1,5 @@
 """
-torchrun --nproc_per_node 1 train.py
+uv run train.py
 """
 import argparse
 import os
@@ -44,9 +44,9 @@ if __name__ == '__main__':
     # training
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--learning_rate", type=float, default=3e-4)
-    parser.add_argument("--seq_len", type=int, default=32)
-    parser.add_argument("--micro_batch_size", type=int, default=1)
-    parser.add_argument("--gradient_accumulation_steps", type=int, default=1)
+    parser.add_argument("--seq_len", type=int, default=1024)
+    parser.add_argument("--micro_batch_size", type=int, default=32)
+    parser.add_argument("--gradient_accumulation_steps", type=int, default=4)
     parser.add_argument("--dataset_name", type=str, default="roneneldan/TinyStories")
     parser.add_argument("--n_tokens", type=int, default=int(1e6))
     parser.add_argument("--num_workers", type=int, default=1)
@@ -130,6 +130,6 @@ if __name__ == '__main__':
         )
 
         wandb.log({"loss": loss, "tokens_per_step": tokens_per_step, "tokens_per_second": tokens_per_step / step_duration,\
-                "memory_usage": torch.cuda.memory_reserved() / 1e9, "trained_tokens": tokens_per_step})
+                "memory_usage": torch.cuda.memory_reserved() / 1e9, "trained_tokens": trained_token})
 
     wandb.finish()

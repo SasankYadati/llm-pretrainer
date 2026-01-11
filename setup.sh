@@ -13,16 +13,17 @@ fi
 # Ensure uv is in PATH for current session
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install torch first (flash-attn needs it for building)
+# Create venv and install torch first (flash-attn needs it for building)
 echo "Installing torch first..."
-uv sync --no-install-project --exclude flash-attn
+uv venv
+uv pip install torch
 
 # Now install flash-attn with torch available
-echo "Installing flash-attn..."
+echo "Installing flash-attn (this may take a few minutes)..."
 uv pip install flash-attn --no-build-isolation
 
-# Install the rest
-echo "Finishing dependency installation..."
+# Install remaining dependencies
+echo "Installing remaining dependencies..."
 uv sync
 
 # Disable wandb by default (set WANDB_API_KEY to enable)

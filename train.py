@@ -80,10 +80,10 @@ if __name__ == '__main__':
     dtype = torch.bfloat16
 
     model_config = AutoConfig.from_pretrained(args.model_name)
-    model_config.num_hidden_layers = args.num_hidden_layers
-    model_config.num_attention_heads = args.num_attention_heads
-    model_config.num_key_value_heads = args.num_key_value_heads
-    model_config.max_position_embeddings = args.seq_len
+    # model_config.num_hidden_layers = args.num_hidden_layers
+    # model_config.num_attention_heads = args.num_attention_heads
+    # model_config.num_key_value_heads = args.num_key_value_heads
+    # model_config.max_position_embeddings = args.seq_len
 
     model = Llama(model_config=model_config)
     model.to(dtype).to(device)

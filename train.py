@@ -46,9 +46,9 @@ if __name__ == '__main__':
     parser.add_argument("--learning_rate", type=float, default=3e-4)
     parser.add_argument("--seq_len", type=int, default=1024)
     parser.add_argument("--micro_batch_size", type=int, default=16)
-    parser.add_argument("--gradient_accumulation_steps", type=int, default=4)
+    parser.add_argument("--gradient_accumulation_steps", type=int, default=8)
     parser.add_argument("--dataset_name", type=str, default="roneneldan/TinyStories")
-    parser.add_argument("--n_tokens", type=int, default=int(2e6))
+    parser.add_argument("--n_tokens", type=int, default=int(1e7))
     parser.add_argument("--num_workers", type=int, default=1)
     parser.add_argument("--num_proc", type=int, default=4)
 

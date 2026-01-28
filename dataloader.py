@@ -12,6 +12,7 @@ class MicroBatchDataLoader(DataLoader):
         micro_batch_size,
         grad_acc_steps,
         dataset_name,
+        dataset_config,
         tokenizer_name,
         n_tokens,
         num_workers,
@@ -24,7 +25,7 @@ class MicroBatchDataLoader(DataLoader):
         self.global_batch_size = micro_batch_size * grad_acc_steps
 
         self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
-        self.dataset = load_dataset(dataset_name, split=split)
+        self.dataset = load_dataset(dataset_name, name=dataset_config, split=split)
         self.tokenized_dataset = self.tokenize_dataset(self.dataset, "text", self.seq_len, num_proc)
         total_tokens = self.tokenized_dataset.num_rows * (self.seq_len + 1)
         assert total_tokens >= n_tokens, f"Need {n_tokens} tokens, have {total_tokens} tokens"

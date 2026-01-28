@@ -1,2 +1,2 @@
 # llm-pretrainer
-Pretraining LLMs with 4D Parallelism
+Pretraining LLMs with 3D Parallelism

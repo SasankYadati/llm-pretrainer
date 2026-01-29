@@ -18,8 +18,12 @@ echo "Installing torch first..."
 uv venv
 uv pip install torch
 
+# Install flash-attn build dependencies (needed if building from source)
+echo "Installing flash-attn build dependencies..."
+uv pip install psutil numpy ninja packaging
+
 # Now install flash-attn with torch available
-echo "Installing flash-attn (this may take a few minutes)..."
+echo "Installing flash-attn (this may take several minutes if building from source)..."
 uv pip install flash-attn --no-build-isolation
 
 # Install remaining dependencies
@@ -36,10 +40,10 @@ echo ""
 echo "=== Setup complete ==="
 echo ""
 echo "To run training:"
-echo "  uv run torchrun --nproc_per_node 1 train.py"
+echo "  uv run train.py"
 echo ""
 echo "With custom parameters:"
-echo "  uv run torchrun --nproc_per_node 1 train.py \\"
+echo "  uv run train.py \\"
 echo "      --seq_len 128 \\"
 echo "      --micro_batch_size 4 \\"
 echo "      --gradient_accumulation_steps 8 \\"

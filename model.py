@@ -124,10 +124,11 @@ class DecoderLayer(nn.Module):
         self.attention = Attention(config)
         self.mlp = MLP(config)
         head_dim = config.hidden_size // config.num_attention_heads
+        rope_theta = getattr(config, 'rope_theta', 10000.0)
         self.cos, self.sin = get_cos_sin(
             config.max_position_embeddings,
             head_dim=head_dim,
-            base=config.rope_theta
+            base=rope_theta
         )
 
     def forward(self, x, attention_mask=None, position_ids=None):

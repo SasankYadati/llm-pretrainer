@@ -41,13 +41,15 @@ class MicroBatchDataLoader(DataLoader):
 
     def tokenizer_group_text(self, examples, tokenizer, sequence_length):
         """Tokenize a list of texts and group them in chunks of sequence_length + 1"""
-        tokenized_text_batch = tokenizer.batch_encode_plus(
+        tokenized_text_batch = tokenizer(
             examples,
             return_attention_mask=False,
             return_token_type_ids=False,
-            return_tensors='np'
+            add_special_tokens=False,
         )
-        concatenated_tokens = {'input_ids': np.concatenate(tokenized_text_batch['input_ids'])}
+        concatenated_tokens = {'input_ids': np.array([
+            token_id for ids in tokenized_text_batch['input_ids'] for token_id in ids
+        ])}
         total_length = len(concatenated_tokens['input_ids'])
 
         if total_length >= sequence_length + 1:

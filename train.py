@@ -101,7 +101,7 @@ if __name__ == '__main__':
     model_config = AutoConfig.from_pretrained(args.model_name)
 
     model = Llama(model_config=model_config)
-    model = torch.compile(model, fullgraph=True)
+    model = torch.compile(model)
     model.to(device)
     model.train()
 

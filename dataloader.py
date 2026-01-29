@@ -76,7 +76,7 @@ class MicroBatchDataLoader(DataLoader):
             input_columns=text_column_name,
             remove_columns=dataset.column_names,
             features=Features({
-                "input_ids": Sequence(feature=Value(dtype="int64"), length=sequence_length + 1)
+                "input_ids": Sequence(feature=Value(dtype="int32"), length=sequence_length + 1)
             }),
             batched=True,
             num_proc=num_proc,

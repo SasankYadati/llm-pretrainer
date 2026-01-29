@@ -18,9 +18,9 @@ echo "Installing torch first..."
 uv venv
 uv pip install torch==2.4.1
 
-# Now install flash-attn with torch available
-echo "Installing flash-attn (this may take several minutes if building from source)..."
-uv pip install flash-attn --no-build-isolation
+# Now install flash-attn (precompiled wheel for torch 2.4.1)
+echo "Installing flash-attn..."
+uv pip install flash-attn==2.7.4.post1 --no-build-isolation
 
 # Install remaining dependencies
 echo "Installing remaining dependencies..."

@@ -68,8 +68,8 @@ if __name__ == '__main__':
     parser.add_argument("--dataset_name", type=str, default="HuggingFaceFW/fineweb-edu")
     parser.add_argument("--dataset_config", type=str, default="sample-10BT")
     parser.add_argument("--n_tokens", type=int, default=int(1e7))
-    parser.add_argument("--num_workers", type=int, default=1)
-    parser.add_argument("--num_proc", type=int, default=4)
+    parser.add_argument("--num_workers", type=int, default=4)
+    parser.add_argument("--num_proc", type=int, default=48)
 
 
     # logging

@@ -16,11 +16,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # Create venv and install torch first (flash-attn needs it for building)
 echo "Installing torch first..."
 uv venv
-uv pip install torch
-
-# Install flash-attn build dependencies (needed if building from source)
-echo "Installing flash-attn build dependencies..."
-uv pip install psutil numpy ninja packaging
+uv pip install torch==2.5.1
 
 # Now install flash-attn with torch available
 echo "Installing flash-attn (this may take several minutes if building from source)..."

@@ -10,7 +10,7 @@ dependencies = [
     "lovely-tensors>=0.1.20",
     "numpy>=2.4.0",
     "psutil>=7.2.1",
-    "torch>=2.9.1",
+    "torch==2.5.1",
     "transformers>=4.57.3",
     "wandb>=0.23.1",
 ]

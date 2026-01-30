@@ -1,15 +1,25 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch._dynamo
 from flash_attn.flash_attn_interface import flash_attn_func
-from flash_attn.layers.rotary import apply_rotary_emb
+from flash_attn.layers.rotary import apply_rotary_emb as _apply_rotary_emb
 from flash_attn.ops.triton.layer_norm import layer_norm_fn
 
+# Disable torch.compile tracing for flash-attn's Triton kernels
+# These are already highly optimized - torch.compile can't improve them
+# and the inductor backend is incompatible with their triton.heuristics decorators
+
+@torch._dynamo.disable
 def flash_attention(q, k, v, causal=True):
     q = q.permute(0, 2, 1, 3)
     k = k.permute(0, 2, 1, 3)
     v = v.permute(0, 2, 1, 3)
     return flash_attn_func(q, k, v, causal=causal)
+
+@torch._dynamo.disable
+def apply_rotary_emb(q, cos, sin, interleaved=False):
+    return _apply_rotary_emb(q, cos, sin, interleaved=interleaved)
 
 def get_cos_sin(seq_length, head_dim, base=500000.0):
     assert head_dim % 2 == 0
@@ -31,6 +41,7 @@ class TritonRMSNorm(nn.Module):
         self.weight = nn.Parameter(torch.ones(hidden_size))
         self.register_parameter("bias", None)
 
+    @torch._dynamo.disable
     def forward(
         self,
         hidden_states,

@@ -31,17 +31,3 @@ if [ -z "$WANDB_API_KEY" ]; then
     echo "WANDB_API_KEY not set, disabling wandb..."
     export WANDB_MODE=disabled
 fi
-
-echo ""
-echo "=== Setup complete ==="
-echo ""
-echo "To run training:"
-echo "  uv run train.py"
-echo ""
-echo "With custom parameters:"
-echo "  uv run train.py \\"
-echo "      --seq_len 128 \\"
-echo "      --micro_batch_size 4 \\"
-echo "      --gradient_accumulation_steps 8 \\"
-echo "      --max_tokens 1000000"
-echo ""

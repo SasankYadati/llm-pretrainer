@@ -62,7 +62,7 @@ if __name__ == '__main__':
     parser.add_argument("--seq_len", type=int, default=512)
     # Global batch: 32 * 16 * 512 = 262K tokens per optimizer step
     # Also holds => 262K = 64 * 8 * 512
-    parser.add_argument("--micro_batch_size", type=int, default=32)
+    parser.add_argument("--micro_batch_size", type=int, default=64)
     parser.add_argument("--gradient_accumulation_steps", type=int, default=8)
     # Batch size warmup: ramp grad_acc_steps from 1 to target over this many tokens (0 = disabled)
     parser.add_argument("--batch_size_warmup_tokens", type=int, default=int(5,000,000))

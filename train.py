@@ -65,10 +65,10 @@ if __name__ == '__main__':
     parser.add_argument("--micro_batch_size", type=int, default=64)
     parser.add_argument("--gradient_accumulation_steps", type=int, default=8)
     # Batch size warmup: ramp grad_acc_steps from 1 to target over this many tokens (0 = disabled)
-    parser.add_argument("--batch_size_warmup_tokens", type=int, default=int(5,000,000))
+    parser.add_argument("--batch_size_warmup_tokens", type=int, default=0)
     parser.add_argument("--dataset_name", type=str, default="HuggingFaceFW/fineweb-edu")
     parser.add_argument("--dataset_config", type=str, default="sample-10BT")
-    parser.add_argument("--n_tokens", type=int, default=int(10,000,000))
+    parser.add_argument("--n_tokens", type=int, default=10000000)
     parser.add_argument("--num_workers", type=int, default=4)
     parser.add_argument("--num_proc", type=int, default=48)
 

@@ -86,9 +86,6 @@ if __name__ == '__main__':
         project="llm-pretrainer",
         name=f"{args.run_name}",
         config={
-            "tensor_parallel_size": 1, # no parallelism
-            "pipeline_parallel_size": 1,
-            "data_parallel_size": 1,
             "model": args.model_name,
             "learning_rate": args.learning_rate,
             "seed": args.seed,

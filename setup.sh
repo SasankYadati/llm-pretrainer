@@ -16,11 +16,11 @@ export PATH="$HOME/.local/bin:$PATH"
 # Create venv and install torch first (flash-attn needs it for building)
 echo "Installing torch first..."
 uv venv
-uv pip install torch==2.4.1
+uv pip install --python .venv/bin/python torch==2.4.1
 
 # Now install flash-attn (precompiled wheel for torch 2.4.1)
 echo "Installing flash-attn..."
-uv pip install flash-attn==2.7.4.post1 --no-build-isolation
+uv pip install --python .venv/bin/python flash-attn==2.7.4.post1 --no-build-isolation
 
 # Install remaining dependencies
 echo "Installing remaining dependencies..."
